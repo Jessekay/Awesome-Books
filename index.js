@@ -17,7 +17,7 @@ function renderBookList() {
   bookList.innerHTML = "";
   bookCollection.forEach((book, index) => {
     const li = document.createElement('li');
-    li.innerHTML = `${book.title} by ${book.author} <br>`;
+    li.innerHTML = `${book.title} by ${book.author} <br> <hr>`;
     bookList.appendChild(li);
 
     const removeButton = document.createElement('button');
