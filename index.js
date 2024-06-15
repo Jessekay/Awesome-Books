@@ -20,10 +20,12 @@ function renderBookList() {
     li.innerHTML = `${book.title} by ${book.author} <br> <hr>`;
     bookList.appendChild(li);
 
+// Add a remove button to each book stored in the book collection
+
     const removeButton = document.createElement('button');
     removeButton.innerHTML = 'Remove';
     li.appendChild(removeButton);
-    
+
     removeButton.addEventListener('click', () => {
       removeBook(index);
     });
@@ -47,4 +49,5 @@ addBookForm.addEventListener('submit', (event) => {
 });
 
 // Initial rendering of the book list
+
 renderBookList();
