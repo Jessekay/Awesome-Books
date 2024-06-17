@@ -1,53 +1,72 @@
-// A collection of books defined as an array of objects
-let bookCollection = [];
+// book classes
+class BookCollection {
+  constructor() {
+    this.books = [];
+    this.bookList = document.getElementById('book-list');
+    this.addBookForm = document.getElementById('add-book-form');
+    this.titleInput = document.getElementById('title-input');
+    this.authorInput = document.getElementById('author-input');
 
-// Get HTML elements
-const bookList = document.getElementById("book-list");
-const addBookForm = document.getElementById("add-book-form");
+    this.addBookForm.addEventListener('submit', this.handleAddBook.bind(this));
+    this.getFromLocalStorage();
+    this.renderBookList();
+  }
 
-// Function to remove a book from the collection
-function removeBook(index) {
-  bookCollection.splice(index, 1);
-  localStorage.setItem('bookCollection', JSON.stringify(bookCollection));
-  renderBookList();
-}
+  handleAddBook(event) {
+    event.preventDefault();
+    const title = this.titleInput.value;
+    const author = this.authorInput.value;
+    this.addBook(title, author);
+    this.renderBookList();
+    this.resetForm();
+  }
 
-// Function to render the book collection
-function renderBookList() {
-  bookList.innerHTML = "";
-  bookCollection.forEach((book, index) => {
-    const li = document.createElement('li');
-    li.innerHTML = `${book.title} by ${book.author} <br> <hr>`;
-    bookList.appendChild(li);
+  addBook(title, author) {
+    this.books.push({ title, author });
+    this.updateLocalStorage();
+  }
 
-// Add a remove button to each book stored in the book collection
+  removeBook(index) {
+    this.books = this.books.filter((book, i) => i !== index);
+    this.updateLocalStorage();
+  }
 
-    const removeButton = document.createElement('button');
-    removeButton.innerHTML = 'Remove';
-    li.appendChild(removeButton);
+  renderBookList() {
+    this.bookList.innerHTML = '';
+    this.books.forEach((book, index) => {
+      const li = document.createElement('p');
+      li.innerHTML = `"${book.title}" by ${book.author} <br> `;
+      this.bookList.appendChild(li);
+      li.dataset.index = index;
 
-    removeButton.addEventListener('click', () => {
-      removeBook(index);
+      const removeButton = document.createElement('button');
+      removeButton.innerHTML = 'Remove';
+      removeButton.addEventListener('click', () => {
+        const index = parseInt(li.dataset.index, 10);
+        this.removeBook(index);
+        this.renderBookList();
+      });
+      li.appendChild(removeButton);
+      if (index % 2 === 1) {
+        li.classList.add('white');
+      }
     });
-  });
+  }
+
+  resetForm() {
+    this.addBookForm.reset();
+  }
+
+  updateLocalStorage() {
+    localStorage.setItem('books', JSON.stringify(this.books));
+  }
+
+  getFromLocalStorage() {
+    const storedBooks = localStorage.getItem('books');
+    if (storedBooks !== null) {
+      this.books = JSON.parse(storedBooks);
+    }
+  }
 }
-
-// Function to add a new book to the collection with title and author
-function addBook(title, author) {
-  bookCollection.push({ title, author });
-  localStorage.setItem('bookCollection', JSON.stringify(bookCollection));
-  renderBookList();
-}
-
-// Example usage of adding a book
-addBookForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const title = addBookForm.elements['title'].value;
-  const author = addBookForm.elements['author'].value;
-  addBook(title, author);
-  addBookForm.reset();
-});
-
-// Initial rendering of the book list
-
-renderBookList();
+const bookCollection = new BookCollection();
+bookCollection.resetForm();

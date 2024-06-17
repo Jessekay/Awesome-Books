@@ -1,19 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Books</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
-  <h1>Awesome Books</h1>
+  <div class="title">
+    <h1>All awesome Books</h1>
+  </div>
   <div id="book-list"></div>
-  <form id="add-book-form">
-  <input type="text" id="title" placeholder="Title" required>
-  <input type="text" id="author" placeholder="Author" required>
-  <button type="submit">add</button>
-</form>
-  <script src="index.js"></script>
+  <hr class="top"/>
+    <form class="form" id="add-book-form">
+      <h2 class="margin">Add a new book</h2>
+      <input class="margin" type="text" id="title-input" placeholder="Title" required>
+      <input class="margin" type="text" id="author-input" placeholder="Author" required>
+      <div class="btn">
+        <button type="submit">Add</button>
+      </div>
+    </form>
+    <script src="./index.js"></script>
 </body>
 </html>

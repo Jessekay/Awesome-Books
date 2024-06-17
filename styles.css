@@ -1,18 +1,58 @@
-body {
-  font-family: Arial, Helvetica, sans-serif;
+.title {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+#book-list {
+  border: 2px solid black;
+  margin-bottom: 30px;
+}
+
+.white {
+  background-color: white;
+}
+
+.top {
+  width: 100px;
+  height: 2px;
+  background-color: black;
+  border-radius: 4px;
+}
+
+form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.margin {
+  margin: 5px;
 }
 
 input {
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  margin-top: 10px;
+  width: 230px;
+  border: 2px solid black;
 }
 
 button {
-  margin-top: 10px;
+  margin: 0;
+  border: 2px solid black;
 }
 
-li {
-  list-style: none;
+.btn {
+  width: 235px;
+  display: flex;
+  justify-content: right;
+  padding-top: 5px;
+}
+
+p {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: lightgray;
+  margin: 0;
+  padding: 10px;
 }
